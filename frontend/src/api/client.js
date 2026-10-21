@@ -1,5 +1,5 @@
 
-export const API = "http://localhost:5000";
+export const API = "https://connectly-9p3p.onrender.com";
 
 export async function request(path, token, options = {}) {
   const response = await fetch(`${API}${path}`, {

@@ -1,0 +1,213 @@
+
+/* ================================
+   AVATAR UPLOAD
+================================ */
+
+.avatar-upload {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+/* Circular image container */
+.avatar-upload__image-wrap {
+  position: relative;
+  width: 104px;
+  height: 104px;
+  min-width: 104px;
+  min-height: 104px;
+  border-radius: 50%;
+  overflow: visible;
+  flex-shrink: 0;
+}
+
+/* Make the image completely fill the circle */
+.avatar-upload__preview {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  object-fit: cover;
+  object-position: center;
+  border: none;
+  border-radius: 50%;
+  box-sizing: border-box;
+}
+
+/* Placeholder */
+.avatar-upload__placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748b;
+  background: #eef2f7;
+  border-radius: 50%;
+}
+
+/* Camera button overlay */
+.avatar-upload__camera {
+  position: absolute !important;
+  z-index: 10;
+  right: -2px;
+  bottom: -2px;
+
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+
+  width: 36px !important;
+  height: 36px !important;
+  min-width: 36px;
+  padding: 0 !important;
+
+  color: #ffffff !important;
+  background: #4f46e5 !important;
+  border: 3px solid #ffffff !important;
+  border-radius: 50% !important;
+
+  opacity: 1 !important;
+  visibility: visible !important;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.avatar-upload__camera svg {
+  display: block;
+  width: 17px;
+  height: 17px;
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+.avatar-upload__camera:hover:not(:disabled) {
+  background: #3730a3 !important;
+  transform: scale(1.06);
+}
+
+.avatar-upload__camera:disabled {
+  cursor: wait;
+  opacity: 0.8 !important;
+}
+
+/* Upload status */
+.avatar-upload__status {
+  margin: 0;
+  color: #64748b;
+  font-size: 12px;
+  text-align: center;
+}
+
+/* Error message */
+.avatar-upload__error {
+  max-width: 260px;
+  margin: 0;
+  padding: 8px 12px;
+  color: #b91c1c;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+/* Loading animation */
+.avatar-upload__spinner {
+  animation: avatar-spin 1s linear infinite;
+}
+
+@keyframes avatar-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .avatar-upload__image-wrap {
+    width: 88px;
+    height: 88px;
+    min-width: 88px;
+    min-height: 88px;
+  }
+
+  .avatar-upload__camera {
+    width: 33px !important;
+    height: 33px !important;
+    min-width: 33px;
+  }
+}
+
+.avatar-upload__image-wrap {
+    position: relative;
+  }
+  
+  .avatar-upload__camera {
+    z-index: 2;
+    cursor: pointer;
+  }
+  
+  .avatar-upload__menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    z-index: 20;
+    width: 190px;
+    padding: 6px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.14);
+  }
+  
+  .avatar-upload__menu button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 11px 10px;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    color: #263047;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+  }
+  
+  .avatar-upload__menu button:hover {
+    background: #f1f5f9;
+  }
+  
+  .avatar-upload__menu button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  
+  .avatar-upload__menu .avatar-upload__remove {
+    color: #dc2626;
+  }
+  
+  .avatar-upload__menu .avatar-upload__remove:hover {
+    background: #fef2f2;
+  }
+  
+  .avatar-upload__spinner {
+    animation: avatar-upload-spin 1s linear infinite;
+  }
+  
+  @keyframes avatar-upload-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  

@@ -1,0 +1,1689 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+/* ========================================
+   1. GLOBAL STYLES
+======================================== */
+
+:root {
+  font-family: "Inter", sans-serif;
+  color: #20283b;
+  background: #f3f5fa;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+body,
+button,
+input,
+textarea,
+select {
+  font-family: "Inter", sans-serif;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-width: 320px;
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  min-height: 100vh;
+  background: #f3f5fa;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid rgba(91, 92, 226, 0.25);
+  outline-offset: 2px;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+::selection {
+  color: #3435a6;
+  background: #e2e3ff;
+}
+
+/* ========================================
+   2. CHAT LAYOUT — 40% CONTACTS / 60% CHAT
+======================================== */
+
+.chat-page {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  padding: 24px;
+  background:
+    radial-gradient(
+      circle at 0% 0%,
+      rgba(104, 105, 237, 0.07),
+      transparent 32%
+    ),
+    #f3f5fa;
+}
+
+.chat-shell {
+  width: 100%;
+  max-width: 1500px;
+  height: calc(100vh - 48px);
+  height: calc(100dvh - 48px);
+  min-height: 480px;
+
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid #e9ecf4;
+  border-radius: 22px;
+  box-shadow: var(--shadow);
+}
+
+/* ========================================
+   3. SIDEBAR
+======================================== */
+
+.sidebar {
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #ffffff;
+  border-right: 1px solid var(--border);
+}
+
+.sidebar-header {
+  min-height: 82px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 20px;
+  border-bottom: 1px solid #f1f2f7;
+}
+
+.brand-inline {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-mark.small {
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  box-shadow: none;
+}
+
+.brand-inline h1 {
+  margin: 0;
+  color: var(--text);
+  font-family: Inter, sans-serif;
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: -0.7px;
+}
+
+.brand-inline p {
+  margin: 3px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.icon-btn {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #7e879a;
+  background: #f7f8fc;
+  border: 1px solid #edf0f6;
+  border-radius: 11px;
+  cursor: pointer;
+  transition: color 0.2s, background 0.2s, border-color 0.2s;
+}
+
+.icon-btn:hover {
+  color: var(--primary);
+  background: var(--primary-light);
+  border-color: #dedfff;
+}
+
+/* ========================================
+   4. USER SUMMARY
+======================================== */
+
+.current-user {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin: 16px 14px 10px;
+  padding: 12px;
+  background: #f8f9fd;
+  border: 1px solid #f0f1f8;
+  border-radius: 15px;
+}
+
+.avatar {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: #5556d8;
+  background: #ececff;
+  border: 1px solid rgba(91, 92, 226, 0.09);
+  border-radius: 50%;
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.profile-avatar {
+  display: block;
+  object-fit: cover;
+  background: #f0f1f8;
+}
+
+.user-info {
+  min-width: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.user-info strong,
+.user-info span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.user-info strong {
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.user-info span {
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.online-dot {
+  width: 9px;
+  height: 9px;
+  flex-shrink: 0;
+  background: #2fc58b;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px #d9f7e9;
+}
+
+/* ========================================
+   5. SIDEBAR PROFILE BUTTON
+======================================== */
+
+.profile-nav-button {
+  width: auto;
+  min-width: 0;
+  min-height: 43px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 14px 12px;
+  padding: 10px 13px;
+  color: #414a60;
+  background: #ffffff;
+  border: 1px solid #e9eaf5;
+  border-radius: 11px;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.profile-nav-button:hover {
+  background: #f3f3ff;
+  border-color: #dadaff;
+}
+
+.profile-nav-button svg {
+  flex-shrink: 0;
+  color: var(--primary);
+}
+
+.profile-nav-button > span:nth-child(2) {
+  flex: 1;
+}
+
+.profile-nav-arrow {
+  margin-left: auto;
+  color: #9299ad;
+}
+
+/* ========================================
+   6. SIDEBAR AVATAR UPLOAD
+======================================== */
+
+.sidebar .avatar-upload {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin: 0 18px 16px;
+  padding: 0 0 15px;
+  border-bottom: 1px solid #f0f1f6;
+}
+
+.sidebar .avatar-upload__preview {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  object-fit: cover;
+  border: 2px solid #ededff;
+  border-radius: 50%;
+}
+
+.sidebar .avatar-upload button {
+  min-height: 34px;
+  padding: 7px 10px;
+  color: var(--primary);
+  background: var(--primary-light);
+  border: 1px solid #e2e3ff;
+  border-radius: 9px;
+  font-size: 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.sidebar .avatar-upload button:hover:not(:disabled) {
+  background: #e2e3ff;
+}
+
+.sidebar .avatar-upload [role="alert"] {
+  width: 100%;
+  margin: 0;
+  color: var(--danger);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+/* ========================================
+   7. CONTACT SEARCH
+======================================== */
+
+.contact-search {
+  min-height: 43px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 16px 20px;
+  padding: 0 12px;
+  color: #969db0;
+  background: #f7f8fc;
+  border: 1px solid #edf0f6;
+  border-radius: 11px;
+}
+
+.contact-search:focus-within {
+  border-color: #c9caff;
+  box-shadow: 0 0 0 3px rgba(91, 92, 226, 0.06);
+}
+
+.contact-search input {
+  width: 100%;
+  min-width: 0;
+  padding: 11px 0;
+  color: var(--text);
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 12px;
+}
+
+.contact-search input:focus-visible {
+  outline: none;
+}
+
+.contact-search input::placeholder {
+  color: #a3aabd;
+}
+
+.contact-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px 11px;
+  color: #949bb0;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.contact-heading span:last-child {
+  min-width: 23px;
+  padding: 4px 6px;
+  color: #696ae3;
+  background: #eeeeff;
+  border-radius: 7px;
+  text-align: center;
+  letter-spacing: 0;
+}
+
+/* ========================================
+   8. CONTACT LIST
+======================================== */
+
+.contact-list {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 0 9px 12px;
+}
+
+.contact-list::-webkit-scrollbar,
+.message-list::-webkit-scrollbar {
+  width: 5px;
+}
+
+.contact-list::-webkit-scrollbar-thumb,
+.message-list::-webkit-scrollbar-thumb {
+  background: #e0e3ee;
+  border-radius: 10px;
+}
+
+.contact-item {
+  width: 100%;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin-bottom: 4px;
+  padding: 11px;
+  color: inherit;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 13px;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.contact-item:hover {
+  background: #f8f9fd;
+}
+
+.contact-item.active {
+  background: #f0f0ff;
+  border-color: #e6e6ff;
+}
+
+.contact-item.active .avatar {
+  background: #e0e1ff;
+}
+
+.contact-details {
+  min-width: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.contact-details strong,
+.contact-details span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.contact-details strong {
+  color: #30394e;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.contact-details span {
+  color: #969db0;
+  font-size: 10px;
+}
+
+.empty-contacts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 12px;
+  color: #a3a9ba;
+  text-align: center;
+}
+
+.empty-contacts > svg {
+  margin-bottom: 12px;
+  color: #b6b7f6;
+}
+
+.empty-contacts p {
+  margin: 0 0 7px;
+  color: #4a5267;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.empty-contacts span {
+  max-width: 230px;
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.sidebar-footer {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 16px;
+  color: #9299ad;
+  background: #fcfcfe;
+  border-top: 1px solid #f0f1f6;
+  font-size: 10px;
+}
+
+.sidebar-footer svg {
+  flex-shrink: 0;
+  color: #7778df;
+}
+
+/* ========================================
+   9. CONVERSATION
+======================================== */
+
+.conversation {
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #fcfcfe;
+  border-left: 1px solid var(--border);
+}
+
+.conversation-header {
+  min-height: 78px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 15px 24px;
+  background: #ffffff;
+  border-bottom: 1px solid #eef0f6;
+}
+
+.conversation-header .avatar {
+  width: 43px;
+  height: 43px;
+}
+
+.conversation-user {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.conversation-user strong,
+.conversation-user span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.conversation-user strong {
+  color: #293247;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.conversation-user span {
+  color: #9299ad;
+  font-size: 11px;
+}
+
+.mobile-back {
+  display: none;
+}
+
+/* ========================================
+   10. CHAT ALERTS
+======================================== */
+
+.chat-alert {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 12px 18px 0;
+  padding: 11px 14px;
+  color: #b52e48;
+  background: #fff0f2;
+  border: 1px solid #ffd9df;
+  border-radius: 10px;
+  font-size: 12px;
+}
+
+.chat-alert button {
+  flex-shrink: 0;
+  color: #b52e48;
+  background: transparent;
+  border: none;
+  font-size: 21px;
+  cursor: pointer;
+}
+
+/* ========================================
+   11. MESSAGE AREA
+======================================== */
+
+.message-list {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 25px 28px;
+  background:
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(243, 244, 255, 0.4),
+      transparent 70%
+    ),
+    #fcfcfe;
+}
+
+.message-row {
+  width: 100%;
+  display: flex;
+  animation: message-in 0.2s ease;
+}
+
+.message-mine {
+  justify-content: flex-end;
+}
+
+.message-theirs {
+  justify-content: flex-start;
+}
+
+.message-bubble {
+  max-width: min(72%, 520px);
+  padding: 12px 15px 9px;
+  border: 1px solid transparent;
+  border-radius: 17px;
+  overflow-wrap: anywhere;
+  box-shadow: 0 2px 5px rgba(30, 40, 70, 0.025);
+}
+
+.message-mine .message-bubble {
+  color: #ffffff;
+  background: linear-gradient(135deg, #696af0, #5556d9);
+  border-bottom-right-radius: 5px;
+}
+
+.message-theirs .message-bubble {
+  color: #394258;
+  background: #ffffff;
+  border-color: #eaedf4;
+  border-bottom-left-radius: 5px;
+}
+
+.message-bubble p {
+  margin: 0;
+  overflow-wrap: anywhere;
+  font-size: 13px;
+  line-height: 1.65;
+  white-space: pre-wrap;
+}
+
+.message-bubble span {
+  display: block;
+  margin-top: 6px;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 9px;
+  text-align: right;
+}
+
+.message-theirs .message-bubble span {
+  color: #a0a6b7;
+}
+
+.message-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: auto;
+  color: #969db0;
+  font-size: 12px;
+}
+
+.conversation-empty {
+  max-width: 340px;
+  margin: auto;
+  padding: 28px;
+  text-align: center;
+}
+
+.empty-icon {
+  width: 68px;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  color: #6465e5;
+  background: #eeeefe;
+  border: 1px solid #e2e3ff;
+  border-radius: 22px;
+}
+
+.conversation-empty h2 {
+  margin: 0 0 10px;
+  color: #30384e;
+  font-family: Inter, sans-serif;
+  font-size: 20px;
+  letter-spacing: -0.5px;
+}
+
+.conversation-empty p {
+  margin: 0;
+  color: #939aae;
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+/* ========================================
+   12. MESSAGE COMPOSER
+======================================== */
+
+.message-composer {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px 22px;
+  background: #ffffff;
+  border-top: 1px solid #eef0f6;
+}
+
+.message-composer input {
+  flex: 1;
+  min-width: 0;
+  min-height: 46px;
+  padding: 12px 16px;
+  color: var(--text);
+  background: #f8f9fd;
+  border: 1px solid #e9ecf4;
+  border-radius: 13px;
+  outline: none;
+  font-size: 12px;
+}
+
+.message-composer input:focus {
+  background: #ffffff;
+  border-color: #c9caff;
+  box-shadow: 0 0 0 3px rgba(91, 92, 226, 0.07);
+}
+
+.message-composer input::placeholder {
+  color: #a0a7b9;
+}
+
+.send-btn {
+  width: 46px;
+  height: 46px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  background: linear-gradient(135deg, #696af0, #5051d5);
+  border: none;
+  border-radius: 13px;
+  box-shadow: 0 5px 12px rgba(91, 92, 226, 0.19);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.send-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 17px rgba(91, 92, 226, 0.27);
+}
+
+.send-btn:disabled {
+  box-shadow: none;
+}
+
+/* ========================================
+   13. WELCOME SCREEN
+======================================== */
+
+.welcome-panel {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  text-align: center;
+  background:
+    radial-gradient(
+      circle at 50% 40%,
+      rgba(110, 111, 245, 0.07),
+      transparent 35%
+    ),
+    #fcfcfe;
+}
+
+.welcome-art {
+  width: 96px;
+  height: 96px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 25px;
+  color: #ffffff;
+  background: linear-gradient(145deg, #7778f7, #5051d5);
+  border: 9px solid #eeeeff;
+  border-radius: 30px;
+  box-shadow: 0 12px 35px rgba(91, 92, 226, 0.17);
+}
+
+.welcome-panel h2 {
+  margin: 0 0 12px;
+  color: #293247;
+  font-family: Inter, sans-serif;
+  font-size: clamp(21px, 2.4vw, 28px);
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.welcome-panel > p {
+  max-width: 340px;
+  margin: 0;
+  color: #9299ad;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.welcome-features {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 27px;
+}
+
+.welcome-features span {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 13px;
+  color: #6b7288;
+  background: #ffffff;
+  border: 1px solid #eceef5;
+  border-radius: 10px;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.welcome-features svg {
+  color: #6869df;
+}
+
+/* ========================================
+   14. PROFILE PAGE
+======================================== */
+
+.profile-page {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow-y: auto;
+  padding: 36px 22px 48px;
+  color: var(--text);
+  background:
+    radial-gradient(
+      circle at 10% 0%,
+      rgba(104, 105, 237, 0.08),
+      transparent 32%
+    ),
+    #f3f5fa;
+}
+
+.profile-page-header {
+  width: 100%;
+  max-width: 760px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin: 0 auto 25px;
+}
+
+.profile-page-header > div {
+  min-width: 0;
+}
+
+.profile-page-header h1 {
+  margin: 0;
+  font-family: Inter, sans-serif;
+  font-size: 27px;
+  font-weight: 800;
+  letter-spacing: -0.8px;
+}
+
+.profile-page-header p {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.profile-card {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 30px;
+  background: #ffffff;
+  border: 1px solid #e7eaf3;
+  border-radius: 22px;
+  box-shadow: var(--shadow);
+}
+
+.profile-card-top {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 8px 0 26px;
+  text-align: center;
+}
+
+.profile-card-top .profile-large-avatar {
+  width: 108px;
+  height: 108px;
+  flex-shrink: 0;
+  display: block;
+  object-fit: cover;
+  border: 4px solid #eeeeff;
+  border-radius: 50%;
+}
+
+.profile-card-top .profile-avatar-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #4338ca;
+  background: #e0e7ff;
+  font-size: 40px;
+  font-weight: 700;
+}
+
+.profile-card-top h2 {
+  max-width: 100%;
+  margin: 15px 0 5px;
+  overflow-wrap: anywhere;
+  font-family: Inter, sans-serif;
+  font-size: 23px;
+  font-weight: 800;
+}
+
+.profile-card-top p {
+  max-width: 100%;
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+.profile-divider {
+  height: 1px;
+  margin: 21px 0;
+  background: #edf0f5;
+}
+
+.profile-card h3 {
+  margin: 0 0 14px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.profile-detail {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 14px 0;
+  border-bottom: 1px solid #f1f3f8;
+}
+
+.profile-detail:last-of-type {
+  border-bottom: none;
+}
+
+.profile-detail-icon {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #4f46e5;
+  background: #eef2ff;
+  border-radius: 12px;
+}
+
+.profile-detail > div:last-child {
+  min-width: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.profile-detail span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.profile-detail strong {
+  color: #30394e;
+  font-size: 14px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.profile-picture-description {
+  margin: -5px 0 18px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* Profile page avatar upload */
+
+.profile-card .avatar-upload {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+  padding: 18px 0 0;
+  border: none;
+}
+
+.profile-card .avatar-upload__preview {
+  width: 84px;
+  height: 84px;
+  flex-shrink: 0;
+  display: block;
+  object-fit: cover;
+  border: 3px solid #e0e7ff;
+  border-radius: 50%;
+}
+
+.profile-card .avatar-upload button {
+  max-width: 100%;
+  min-height: 40px;
+  padding: 10px 16px;
+  color: #4338ca;
+  background: #eef2ff;
+  border: 1px solid #c7d2fe;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.profile-card .avatar-upload button:hover:not(:disabled) {
+  background: #e0e7ff;
+}
+
+.profile-card .avatar-upload [role="alert"] {
+  max-width: 100%;
+  margin: 0;
+  color: var(--danger);
+  font-size: 12px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* ========================================
+   15. ANIMATIONS
+======================================== */
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(7px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes message-in {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========================================
+   16. TABLET RESPONSIVENESS
+   Keep the 40% / 60% split
+======================================== */
+
+@media (max-width: 900px) {
+  .chat-page {
+    padding: 12px;
+  }
+
+  .chat-shell {
+    height: calc(100dvh - 24px);
+    min-height: 480px;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    border-radius: 18px;
+  }
+
+  .sidebar-header {
+    padding: 15px;
+  }
+
+  .current-user {
+    margin-right: 11px;
+    margin-left: 11px;
+  }
+
+  .profile-nav-button {
+    margin-right: 11px;
+    margin-left: 11px;
+  }
+
+  .contact-search {
+    margin-right: 12px;
+    margin-left: 12px;
+  }
+
+  .message-list {
+    padding: 22px 18px;
+  }
+
+  .conversation-header {
+    padding-right: 17px;
+    padding-left: 17px;
+  }
+
+  .message-composer {
+    padding: 13px;
+  }
+}
+
+/* ========================================
+   17. MOBILE RESPONSIVENESS
+======================================== */
+
+@media (max-width: 640px) {
+  .auth-page {
+    padding: 18px;
+  }
+
+  .auth-card {
+    padding: 32px 23px 27px;
+    border-radius: 20px;
+  }
+
+  .chat-page {
+    min-height: 100dvh;
+    padding: 0;
+    background: #ffffff;
+  }
+
+  .chat-shell {
+    position: relative;
+    width: 100%;
+    height: 100dvh;
+    min-height: 0;
+    display: block;
+    overflow: hidden;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    border-right: none;
+  }
+
+  .sidebar-hidden-mobile {
+    display: none;
+  }
+
+  .sidebar-header {
+    min-height: 72px;
+    padding: 14px 17px;
+  }
+
+  .current-user {
+    margin-top: 12px;
+  }
+
+  .contact-list {
+    padding-bottom: 18px;
+  }
+
+  .conversation {
+    display: none;
+    border-left: none;
+  }
+
+  .conversation-visible-mobile {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+  }
+
+  .conversation-header {
+    min-height: 67px;
+    gap: 10px;
+    padding: 11px 13px;
+  }
+
+  .mobile-back {
+    display: inline-flex;
+  }
+
+  .conversation-header .avatar {
+    width: 39px;
+    height: 39px;
+  }
+
+  .message-list {
+    gap: 12px;
+    padding: 18px 13px;
+  }
+
+  .message-bubble {
+    max-width: 86%;
+    padding: 10px 12px 8px;
+  }
+
+  .message-bubble p {
+    font-size: 12px;
+  }
+
+  .message-composer {
+    gap: 9px;
+    padding: 10px 11px;
+    padding-bottom: max(10px, env(safe-area-inset-bottom));
+  }
+
+  .message-composer input {
+    min-height: 43px;
+    padding: 10px 12px;
+  }
+
+  .send-btn {
+    width: 43px;
+    height: 43px;
+  }
+
+  .chat-alert {
+    margin-right: 11px;
+    margin-left: 11px;
+  }
+
+  .welcome-panel {
+    padding: 22px;
+  }
+
+  .welcome-art {
+    width: 80px;
+    height: 80px;
+    border-radius: 26px;
+  }
+
+  .welcome-panel h2 {
+    font-size: 22px;
+  }
+
+  .welcome-panel > p {
+    font-size: 12px;
+  }
+
+  .profile-page {
+    padding: 22px 13px 32px;
+  }
+
+  .profile-page-header {
+    gap: 11px;
+    margin-bottom: 18px;
+  }
+
+  .profile-page-header h1 {
+    font-size: 23px;
+  }
+
+  .profile-page-header p {
+    font-size: 12px;
+  }
+
+  .profile-card {
+    padding: 21px 17px;
+    border-radius: 17px;
+  }
+
+  .profile-card-top .profile-large-avatar {
+    width: 94px;
+    height: 94px;
+  }
+
+  .profile-card-top h2 {
+    font-size: 21px;
+  }
+
+  .profile-detail {
+    gap: 11px;
+    padding: 12px 0;
+  }
+
+  .profile-detail-icon {
+    width: 39px;
+    height: 39px;
+  }
+
+  .profile-detail strong {
+    font-size: 13px;
+  }
+}
+
+/* ========================================
+   18. SMALL MOBILE SCREENS
+======================================== */
+
+@media (max-width: 380px) {
+  .auth-card {
+    padding: 26px 18px;
+  }
+
+  .brand-inline {
+    gap: 8px;
+  }
+
+  .brand-inline h1 {
+    font-size: 17px;
+  }
+
+  .brand-mark.small {
+    width: 37px;
+    height: 37px;
+  }
+
+  .current-user {
+    gap: 8px;
+    padding: 10px;
+  }
+
+  .current-user .avatar {
+    width: 38px;
+    height: 38px;
+  }
+
+  .profile-page {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+
+  .profile-card {
+    padding: 18px 13px;
+  }
+
+  .profile-detail-icon {
+    width: 35px;
+    height: 35px;
+  }
+
+  .message-bubble {
+    max-width: 92%;
+  }
+}
+
+/* ========================================
+   19. ACCESSIBILITY
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ========================================
+   21. EXTRA LARGE TYPOGRAPHY
+======================================== */
+
+/* Global default */
+body {
+  font-size: 16px;
+}
+
+/* App branding */
+.brand-inline h1 {
+  font-size: 26px;
+}
+
+.brand-inline p {
+  font-size: 14px;
+}
+
+/* User summary in sidebar */
+.user-info strong {
+  font-size: 16px;
+}
+
+.user-info span {
+  font-size: 14px;
+}
+
+/* Profile button */
+.profile-nav-button {
+  font-size: 15px;
+}
+
+/* Contact search */
+.contact-search input {
+  font-size: 16px;
+}
+
+.contact-search input::placeholder {
+  font-size: 15px;
+}
+
+.contact-heading {
+  font-size: 13px;
+}
+
+.contact-heading span:last-child {
+  font-size: 13px;
+}
+
+/* Contacts */
+.contact-details strong {
+  font-size: 16px;
+}
+
+.contact-details span {
+  font-size: 14px;
+}
+
+.empty-contacts p {
+  font-size: 16px;
+}
+
+.empty-contacts span {
+  font-size: 14px;
+}
+
+/* Sidebar footer */
+.sidebar-footer {
+  font-size: 13px;
+}
+
+/* Conversation header */
+.conversation-user strong {
+  font-size: 17px;
+}
+
+.conversation-user span {
+  font-size: 14px;
+}
+
+/* Chat alerts */
+.chat-alert {
+  font-size: 15px;
+}
+
+/* Chat messages */
+.message-bubble p {
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.message-bubble span {
+  font-size: 12px;
+}
+
+.message-status {
+  font-size: 14px;
+}
+
+/* Empty chat screen */
+.conversation-empty h2 {
+  font-size: 26px;
+}
+
+.conversation-empty p {
+  font-size: 15px;
+  line-height: 1.9;
+}
+
+/* Message composer */
+.message-composer input {
+  font-size: 16px;
+}
+
+.message-composer input::placeholder {
+  font-size: 15px;
+}
+
+/* Welcome screen */
+.welcome-panel h2 {
+  font-size: 34px;
+}
+
+.welcome-panel > p {
+  font-size: 16px;
+  line-height: 1.9;
+}
+
+.welcome-features span {
+  font-size: 13px;
+}
+
+/* Profile page headings */
+.profile-page-header h1 {
+  font-size: 34px;
+}
+
+.profile-page-header p {
+  font-size: 16px;
+}
+
+.profile-card-top h2 {
+  font-size: 29px;
+}
+
+.profile-card-top p {
+  font-size: 16px;
+}
+
+.profile-card h3 {
+  font-size: 20px;
+}
+
+/* Profile information */
+.profile-detail span {
+  font-size: 15px;
+}
+
+.profile-detail strong {
+  font-size: 17px;
+}
+
+.profile-picture-description {
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+/* Avatar upload buttons */
+.sidebar .avatar-upload button,
+.profile-card .avatar-upload button {
+  font-size: 13px;
+}
+
+/* Mobile adjustments */
+@media (max-width: 640px) {
+  .brand-inline h1 {
+    font-size: 23px;
+  }
+
+  .brand-inline p {
+    font-size: 13px;
+  }
+
+  .user-info strong {
+    font-size: 15px;
+  }
+
+  .user-info span {
+    font-size: 13px;
+  }
+
+  .contact-details strong {
+    font-size: 16px;
+  }
+
+  .contact-details span {
+    font-size: 13px;
+  }
+
+  .conversation-user strong {
+    font-size: 16px;
+  }
+
+  .conversation-user span {
+    font-size: 13px;
+  }
+
+  .message-bubble p {
+    font-size: 15px;
+  }
+
+  .message-bubble span {
+    font-size: 11px;
+  }
+
+  .message-composer input {
+    font-size: 16px;
+  }
+
+  .welcome-panel h2 {
+    font-size: 27px;
+  }
+
+  .welcome-panel > p {
+    font-size: 15px;
+  }
+
+  .profile-page-header h1 {
+    font-size: 27px;
+  }
+
+  .profile-page-header p {
+    font-size: 14px;
+  }
+
+  .profile-card-top h2 {
+    font-size: 25px;
+  }
+
+  .profile-card-top p {
+    font-size: 14px;
+  }
+
+  .profile-card h3 {
+    font-size: 18px;
+  }
+
+  .profile-detail span {
+    font-size: 13px;
+  }
+
+  .profile-detail strong {
+    font-size: 15px;
+  }
+}

@@ -1,278 +1,250 @@
 
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap");
+
 /* ========================================
-   CONNECTLY — SIDEBAR
+   SIDEBAR BASE
 ======================================== */
 
 .sidebar {
-  width: 100%;
+  width: 340px;
+  min-width: 300px;
   height: 100%;
-  min-width: 0;
-  min-height: 0;
   display: flex;
   flex-direction: column;
+  flex-shrink: 0;
   overflow: hidden;
-  color: #262626;
-  background: #ffffff;
-  border-right: 1px solid #efefef;
+  background: #101015;
+  border-right: 1px solid #292631;
+  color: #f5f3ff;
+  font-family: "DM Sans", "Inter", sans-serif;
+  transition:
+    width 0.25s ease,
+    min-width 0.25s ease,
+    opacity 0.2s ease;
   box-sizing: border-box;
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  letter-spacing: -0.2px;
+}
+
+.sidebar * {
+  box-sizing: border-box;
 }
 
 /* ========================================
-   1. SIDEBAR HEADER
+   HEADER
 ======================================== */
 
 .sidebar-header {
-  width: 100%;
-  min-height: 86px;
-  flex-shrink: 0;
+  min-height: 82px;
+  padding: 0 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 16px 20px;
-  background: #ffffff;
-  border-bottom: 1px solid #f0f0f0;
-  box-sizing: border-box;
+  border-bottom: 1px solid #25232e;
+  background: #101015;
 }
 
 .brand-inline {
-  min-width: 0;
   display: flex;
   align-items: center;
   gap: 12px;
+  min-width: 0;
 }
 
 .brand-mark.small {
-  width: 46px;
-  height: 46px;
-  min-width: 46px;
-  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
   display: flex;
+  flex-shrink: 0;
   align-items: center;
   justify-content: center;
-  color: #ffffff;
-  background: linear-gradient(145deg, #7778f7, #5051d5);
+  border: 1px solid rgba(167, 139, 250, 0.3);
   border-radius: 14px;
-}
-
-.brand-mark.small svg {
-  width: 23px;
-  height: 23px;
-  flex-shrink: 0;
-}
-
-.brand-inline > div:last-child {
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 4px;
+  color: #fff;
+  background: linear-gradient(135deg, #7c3aed, #581c4e);
+  box-shadow: 0 5px 20px rgba(124, 58, 237, 0.18);
 }
 
 .brand-inline h1 {
   margin: 0;
-  color: #262626;
+  color: #faf9ff;
   font-family: "Inter", sans-serif;
-  font-size: 22px;
-  font-weight: 700;
-  line-height: 1.2;
+  font-size: 19px;
+  font-weight: 800;
   letter-spacing: -0.7px;
-  white-space: nowrap;
 }
-
-.brand-inline p {
-  margin: 0;
-  color: #8e8e8e;
-  font-size: 13px;
-  line-height: 1.4;
-}
-
-/* ========================================
-   2. HEADER ACTION BUTTONS
-======================================== */
 
 .sidebar-header-actions {
-  flex-shrink: 0;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
   gap: 9px;
 }
 
-.sidebar-profile-button,
-.sidebar-header-actions .icon-btn {
-  width: 42px;
-  height: 42px;
-  min-width: 42px;
-  flex-shrink: 0;
+/* ========================================
+   PROFILE BUTTON
+======================================== */
+
+.sidebar-profile-button {
+  width: 38px;
+  height: 38px;
+  padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0;
-  color: #555555;
-  background: #fafafa;
-  border: 1px solid #efefef;
-  border-radius: 12px;
-  cursor: pointer;
-  box-sizing: border-box;
-  transition: color 0.2s, background 0.2s, transform 0.2s;
-}
-
-.sidebar-profile-button:hover,
-.sidebar-header-actions .icon-btn:hover {
-  color: #5556d8;
-  background: #f1f1ff;
-}
-
-.sidebar-profile-button:active,
-.sidebar-header-actions .icon-btn:active {
-  transform: scale(0.96);
-}
-
-.sidebar-profile-button svg,
-.sidebar-header-actions .icon-btn svg {
-  width: 20px;
-  height: 20px;
   flex-shrink: 0;
+  overflow: hidden;
+  border: 1px solid #41364f;
+  border-radius: 50%;
+  color: #e9ddff;
+  background: #211a2d;
+  cursor: pointer;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.sidebar-profile-button:hover {
+  border-color: #a78bfa;
+  transform: scale(1.05);
 }
 
 .sidebar-profile-image {
   width: 100%;
   height: 100%;
   display: block;
+  border-radius: 50%;
   object-fit: cover;
-  border-radius: inherit;
 }
 
 /* ========================================
-   3. CONTACT SEARCH
-   Extra top spacing keeps it below header
+   ICON BUTTONS
+======================================== */
+
+.sidebar .icon-btn {
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1px solid #302b3b;
+  border-radius: 12px;
+  color: #aaa4b8;
+  background: #19171f;
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.sidebar .icon-btn:hover {
+  color: #fff;
+  background: rgba(124, 58, 237, 0.16);
+  border-color: #6844a0;
+}
+
+/* ========================================
+   CONTACT SEARCH
 ======================================== */
 
 .contact-search {
-  width: auto;
-  min-width: 0;
-  min-height: 48px;
-  flex-shrink: 0;
+  min-height: 44px;
+  margin: 22px 18px 24px;
+  padding: 0 13px;
   display: flex;
   align-items: center;
-  gap: 12px;
-
-  /* KEY FIX: space between header and search */
-  margin: 30px 18px 22px;
-
-  padding: 0 14px;
-  color: #8e8e8e;
-  background: #f7f7f7;
-  border: 1px solid #efefef;
-  border-radius: 12px;
-  box-sizing: border-box;
-  transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+  gap: 10px;
+  border: 1px solid #302b3b;
+  border-radius: 13px;
+  color: #8e879e;
+  background: #18171e;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .contact-search:focus-within {
-  background: #ffffff;
-  border-color: #c9caff;
-  box-shadow: 0 0 0 3px rgba(91, 92, 226, 0.07);
+  border-color: #8052cf;
+  background: #1b1823;
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
 }
 
 .contact-search > svg {
-  width: 19px;
-  height: 19px;
   flex-shrink: 0;
+  color: #958ba8;
 }
 
 .contact-search input {
   width: 100%;
   min-width: 0;
-  height: 46px;
+  height: 42px;
   padding: 0;
-  color: #262626;
-  background: transparent;
   border: none;
   outline: none;
-  font-family: inherit;
-  font-size: 14px;
-  font-weight: 400;
-  letter-spacing: 0;
-  line-height: normal;
-  box-sizing: border-box;
+  color: #f5f3ff;
+  background: transparent;
+  font-family: "DM Sans", sans-serif;
+  font-size: 13px;
 }
 
 .contact-search input::placeholder {
-  color: #8e8e8e;
-  opacity: 1;
+  color: #777181;
 }
 
-.contact-search input:focus-visible {
+.contact-search input:focus {
   outline: none;
+  box-shadow: none;
 }
 
 /* ========================================
-   4. CONTACT SECTION HEADING
+   CONTACT SECTION HEADING
 ======================================== */
 
 .contact-heading {
-  min-width: 0;
-  flex-shrink: 0;
+  padding: 0 21px;
+  margin-bottom: 12px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  padding: 0 20px 13px;
-  color: #8e8e8e;
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 1.4;
-  letter-spacing: 0.6px;
 }
 
 .contact-heading span:first-child {
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  color: #938b9f;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
 }
 
 .contact-heading span:last-child {
-  min-width: 27px;
-  height: 27px;
-  flex-shrink: 0;
-  display: flex;
+  min-width: 25px;
+  height: 23px;
+  padding: 0 7px;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0 7px;
-  color: #5556d8;
-  background: #eeeeff;
+  border: 1px solid #393044;
   border-radius: 8px;
-  font-size: 13px;
-  font-weight: 600;
-  line-height: 1;
-  letter-spacing: 0;
-  box-sizing: border-box;
+  color: #d7c5ff;
+  background: #211a2d;
+  font-size: 11px;
+  font-weight: 700;
 }
 
 /* ========================================
-   5. CONTACT LIST
+   CONTACT LIST
 ======================================== */
 
 .contact-list {
   flex: 1;
-  min-width: 0;
   min-height: 0;
-  display: flex;
-  flex-direction: column;
-  overflow-x: hidden;
+  padding: 0 10px 12px;
   overflow-y: auto;
-  padding: 0 10px 14px;
-  box-sizing: border-box;
-  overscroll-behavior: contain;
+  overflow-x: hidden;
 }
 
 .contact-list::-webkit-scrollbar {
-  width: 5px;
+  width: 4px;
 }
 
 .contact-list::-webkit-scrollbar-track {
@@ -280,303 +252,208 @@
 }
 
 .contact-list::-webkit-scrollbar-thumb {
-  background: #e0e0e0;
   border-radius: 10px;
+  background: #393142;
+}
+
+.contact-list::-webkit-scrollbar-thumb:hover {
+  background: #6d4b91;
 }
 
 /* ========================================
-   6. INDIVIDUAL CONTACT
+   CONTACT ITEM
 ======================================== */
 
 .contact-item {
   width: 100%;
-  min-width: 0;
-  min-height: 76px;
-  flex-shrink: 0;
+  min-height: 72px;
+  padding: 12px 11px;
+  margin-bottom: 4px;
   display: flex;
   align-items: center;
-  gap: 13px;
-  margin: 0 0 5px;
-  padding: 12px;
-  color: inherit;
-  background: transparent;
-  border: 1px solid transparent;
-  border-radius: 12px;
+  gap: 12px;
   text-align: left;
+  border: 1px solid transparent;
+  border-radius: 13px;
+  color: #f5f3ff;
+  background: transparent;
   cursor: pointer;
-  box-sizing: border-box;
-  transition: background 0.2s, border-color 0.2s;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
 }
 
 .contact-item:hover {
-  background: #f8f8f8;
+  background: #1b1822;
+  border-color: #30283d;
+}
+
+.contact-item:active {
+  transform: scale(0.99);
 }
 
 .contact-item.active {
-  background: #f1f1ff;
-  border-color: #e6e6ff;
+  border-color: rgba(139, 92, 246, 0.28);
+  background: linear-gradient(
+    100deg,
+    rgba(124, 58, 237, 0.18),
+    rgba(128, 30, 76, 0.1)
+  );
 }
 
-.contact-item.active .avatar {
-  background: #e0e1ff;
+.contact-item.active .contact-details strong {
+  color: #e9ddff;
 }
+
+/* ========================================
+   AVATARS
+======================================== */
 
 .contact-item .avatar {
-  width: 48px;
-  height: 48px;
-  min-width: 48px;
-  flex-shrink: 0;
+  width: 46px;
+  height: 46px;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
   overflow: hidden;
-  color: #5556d8;
-  background: #ececff;
-  border: 1px solid rgba(91, 92, 226, 0.09);
+  border: 1px solid rgba(167, 139, 250, 0.22);
   border-radius: 50%;
+  color: #fff;
+  background: linear-gradient(135deg, #7137a8, #4a204e);
   font-size: 17px;
-  font-weight: 600;
-  line-height: 1;
+  font-weight: 700;
   text-transform: uppercase;
-  box-sizing: border-box;
 }
 
-.contact-item .profile-avatar {
-  display: block;
+.contact-item img.profile-avatar {
   object-fit: cover;
 }
+
+/* ========================================
+   CONTACT DETAILS
+======================================== */
 
 .contact-details {
   min-width: 0;
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 6px;
-  overflow: hidden;
+  gap: 5px;
 }
 
-.contact-details strong,
-.contact-details span {
-  display: block;
-  max-width: 100%;
+.contact-details strong {
   overflow: hidden;
+  color: #eeeaf5;
+  font-size: 13px;
+  font-weight: 600;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.contact-details strong {
-  color: #262626;
-  font-size: 15px;
-  font-weight: 600;
-  line-height: 1.4;
-}
-
 .contact-details span {
-  color: #8e8e8e;
-  font-size: 13px;
+  overflow: hidden;
+  color: #898294;
+  font-size: 11px;
   font-weight: 400;
-  line-height: 1.4;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 /* ========================================
-   7. EMPTY CONTACTS STATE
+   EMPTY CONTACTS
 ======================================== */
 
 .empty-contacts {
-  width: 100%;
+  min-height: 190px;
+  padding: 30px 18px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  margin: auto 0;
-  padding: 35px 15px;
-  color: #a3a3a3;
   text-align: center;
-  box-sizing: border-box;
+  color: #8e849e;
 }
 
 .empty-contacts > svg {
-  width: 34px;
-  height: 34px;
-  flex-shrink: 0;
-  margin-bottom: 5px;
-  color: #8586ec;
+  margin-bottom: 14px;
+  color: #8960c9;
+  opacity: 0.85;
 }
 
 .empty-contacts p {
-  margin: 0;
-  color: #414141;
-  font-size: 15px;
+  margin: 0 0 8px;
+  color: #ded6eb;
+  font-size: 13px;
   font-weight: 600;
-  line-height: 1.5;
 }
 
 .empty-contacts span {
-  max-width: 250px;
-  color: #8e8e8e;
-  font-size: 13px;
+  max-width: 230px;
+  color: #837b8e;
+  font-size: 11px;
   line-height: 1.7;
 }
 
 /* ========================================
-   8. SIDEBAR FOOTER
+   FOOTER
 ======================================== */
 
 .sidebar-footer {
-  width: 100%;
-  min-width: 0;
-  flex-shrink: 0;
+  min-height: 52px;
+  padding: 0 17px;
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 16px 18px;
-  color: #8e8e8e;
-  background: #fcfcfc;
-  border-top: 1px solid #efefef;
-  font-size: 12px;
-  line-height: 1.6;
-  box-sizing: border-box;
+  justify-content: center;
+  gap: 8px;
+  border-top: 1px solid #292631;
+  color: #8e879b;
+  background: #101015;
+  font-size: 10px;
 }
 
 .sidebar-footer svg {
-  width: 18px;
-  height: 18px;
   flex-shrink: 0;
-  color: #696ae0;
-}
-
-.sidebar-footer span {
-  min-width: 0;
-  overflow-wrap: anywhere;
+  color: #a78bfa;
 }
 
 /* ========================================
-   9. COLLAPSED SIDEBAR
+   COLLAPSED SIDEBAR
 ======================================== */
 
 .sidebar.sidebar-collapsed {
-  display: none;
+  width: 0;
+  min-width: 0;
+  border: none;
+  opacity: 0;
+  pointer-events: none;
 }
 
 /* ========================================
-   10. TABLET
+   RESPONSIVE
 ======================================== */
 
 @media (max-width: 900px) {
+  .sidebar {
+    width: 310px;
+    min-width: 280px;
+  }
+
   .sidebar-header {
-    min-height: 78px;
-    gap: 8px;
-    padding: 13px;
-  }
-
-  .brand-inline {
-    gap: 9px;
-  }
-
-  .brand-mark.small {
-    width: 40px;
-    height: 40px;
-    min-width: 40px;
-    border-radius: 12px;
-  }
-
-  .brand-mark.small svg {
-    width: 21px;
-    height: 21px;
-  }
-
-  .brand-inline h1 {
-    font-size: 19px;
-  }
-
-  .brand-inline p {
-    font-size: 12px;
-  }
-
-  .sidebar-header-actions {
-    gap: 6px;
-  }
-
-  .sidebar-profile-button,
-  .sidebar-header-actions .icon-btn {
-    width: 36px;
-    height: 36px;
-    min-width: 36px;
-    border-radius: 10px;
-  }
-
-  .sidebar-profile-button svg,
-  .sidebar-header-actions .icon-btn svg {
-    width: 18px;
-    height: 18px;
+    padding: 0 15px;
   }
 
   .contact-search {
-    min-height: 44px;
-    margin: 25px 12px 18px;
-    padding: 0 10px;
-    gap: 8px;
-  }
-
-  .contact-search input {
-    height: 42px;
-    font-size: 14px;
-  }
-
-  .contact-heading {
-    padding-right: 13px;
-    padding-left: 13px;
-    font-size: 11px;
-  }
-
-  .contact-list {
-    padding-right: 6px;
-    padding-left: 6px;
-  }
-
-  .contact-item {
-    min-height: 67px;
-    gap: 9px;
-    padding: 9px;
-  }
-
-  .contact-item .avatar {
-    width: 40px;
-    height: 40px;
-    min-width: 40px;
-    font-size: 15px;
-  }
-
-  .contact-details {
-    gap: 5px;
-  }
-
-  .contact-details strong {
-    font-size: 13px;
-  }
-
-  .contact-details span {
-    font-size: 11px;
-  }
-
-  .sidebar-footer {
-    gap: 7px;
-    padding: 12px;
-    font-size: 11px;
+    margin-right: 14px;
+    margin-left: 14px;
   }
 }
 
-/* ========================================
-   11. MOBILE
-======================================== */
-
-@media (max-width: 640px) {
+@media (max-width: 600px) {
   .sidebar {
     width: 100%;
-    height: 100%;
-    min-height: 0;
+    min-width: 0;
     border-right: none;
   }
 
@@ -585,181 +462,25 @@
   }
 
   .sidebar-header {
-    min-height: 74px;
-    padding: 13px 16px;
-  }
-
-  .brand-inline {
-    gap: 10px;
-  }
-
-  .brand-mark.small {
-    width: 42px;
-    height: 42px;
-    min-width: 42px;
-  }
-
-  .brand-inline h1 {
-    font-size: 21px;
-  }
-
-  .brand-inline p {
-    font-size: 12px;
-  }
-
-  .sidebar-header-actions {
-    gap: 8px;
-  }
-
-  .sidebar-profile-button,
-  .sidebar-header-actions .icon-btn {
-    width: 39px;
-    height: 39px;
-    min-width: 39px;
+    min-height: 72px;
   }
 
   .contact-search {
-    min-height: 46px;
-    margin: 25px 14px 19px;
-    padding: 0 12px;
-    gap: 10px;
-  }
-
-  .contact-search input {
-    height: 44px;
-    font-size: 15px;
-  }
-
-  .contact-heading {
-    padding: 0 18px 12px;
-    font-size: 12px;
-  }
-
-  .contact-list {
-    padding: 0 9px 14px;
+    margin-top: 18px;
+    margin-bottom: 22px;
   }
 
   .contact-item {
-    min-height: 74px;
-    gap: 12px;
-    margin-bottom: 4px;
-    padding: 11px;
-  }
-
-  .contact-item .avatar {
-    width: 46px;
-    height: 46px;
-    min-width: 46px;
-    font-size: 16px;
-  }
-
-  .contact-details strong {
-    font-size: 15px;
-  }
-
-  .contact-details span {
-    font-size: 12px;
-  }
-
-  .empty-contacts {
-    padding: 30px 18px;
-  }
-
-  .sidebar-footer {
-    padding: 14px 16px;
-    font-size: 12px;
+    min-height: 70px;
   }
 }
-
-/* ========================================
-   12. SMALL MOBILE
-======================================== */
-
-@media (max-width: 380px) {
-  .sidebar-header {
-    gap: 6px;
-    padding-right: 10px;
-    padding-left: 10px;
-  }
-
-  .brand-inline {
-    gap: 7px;
-  }
-
-  .brand-mark.small {
-    width: 36px;
-    height: 36px;
-    min-width: 36px;
-    border-radius: 10px;
-  }
-
-  .brand-mark.small svg {
-    width: 19px;
-    height: 19px;
-  }
-
-  .brand-inline h1 {
-    font-size: 18px;
-  }
-
-  .brand-inline p {
-    font-size: 11px;
-  }
-
-  .sidebar-header-actions {
-    gap: 5px;
-  }
-
-  .sidebar-profile-button,
-  .sidebar-header-actions .icon-btn {
-    width: 34px;
-    height: 34px;
-    min-width: 34px;
-  }
-
-  .contact-search {
-    margin: 22px 10px 16px;
-  }
-
-  .contact-heading {
-    padding-right: 13px;
-    padding-left: 13px;
-    font-size: 11px;
-  }
-
-  .contact-item {
-    gap: 9px;
-    padding: 9px;
-  }
-
-  .contact-item .avatar {
-    width: 40px;
-    height: 40px;
-    min-width: 40px;
-  }
-
-  .contact-details strong {
-    font-size: 14px;
-  }
-
-  .contact-details span {
-    font-size: 11px;
-  }
-
-  .sidebar-footer {
-    padding-right: 10px;
-    padding-left: 10px;
-    font-size: 11px;
-  }
-}
-
-/* ========================================
-   13. ACCESSIBILITY
-======================================== */
 
 @media (prefers-reduced-motion: reduce) {
+  .sidebar,
+  .contact-item,
+  .sidebar .icon-btn,
   .sidebar-profile-button,
-  .sidebar-header-actions .icon-btn {
+  .contact-search {
     transition: none;
   }
 }

@@ -1,117 +1,160 @@
 
-/* =====================================
-   CONNECTLY — CHAT APP LAYOUT
-===================================== */
+/* ========================================
+   CONNECTLY — CHAT APP THEME
+   Black • Purple • Wine • White
+======================================== */
 
 .chat-page {
-    width: 100%;
-    min-height: 100vh;
-    padding: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #f4f5fb;
-    color: #20283b;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    box-sizing: border-box;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  padding: 20px;
+  overflow: hidden;
+  box-sizing: border-box;
+  background:
+    radial-gradient(
+      ellipse at 10% 0%,
+      rgba(124, 58, 237, 0.12),
+      transparent 38%
+    ),
+    radial-gradient(
+      ellipse at 95% 100%,
+      rgba(128, 30, 76, 0.12),
+      transparent 38%
+    ),
+    #09090d;
+  color: #f5f3ff;
+  font-family: "DM Sans", "Inter", sans-serif;
+}
+
+.chat-shell {
+  width: 100%;
+  max-width: 1500px;
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+  overflow: hidden;
+  border: 1px solid #292631;
+  border-radius: 20px;
+  background: #101015;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+}
+
+/* ========================================
+   SHARED SCROLLBARS
+======================================== */
+
+.chat-shell * {
+  scrollbar-width: thin;
+  scrollbar-color: #393143 transparent;
+}
+
+.chat-shell *::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.chat-shell *::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.chat-shell *::-webkit-scrollbar-thumb {
+  background: #393143;
+  border-radius: 10px;
+}
+
+.chat-shell *::-webkit-scrollbar-thumb:hover {
+  background: #7650a8;
+}
+
+/* ========================================
+   SHARED INPUT STYLING
+======================================== */
+
+.chat-shell input,
+.chat-shell textarea {
+  color: #f5f3ff;
+  background: #15141c;
+  border: 1px solid #302b3a;
+  border-radius: 10px;
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.chat-shell input::placeholder,
+.chat-shell textarea::placeholder {
+  color: #858195;
+  opacity: 1;
+}
+
+.chat-shell input:focus,
+.chat-shell textarea:focus {
+  border-color: #9365e8;
+  box-shadow: 0 0 0 3px rgba(147, 101, 232, 0.12);
+  background: #191722;
+}
+
+/* ========================================
+   SHARED BUTTON STYLING
+======================================== */
+
+.chat-shell button {
+  font-family: inherit;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.chat-shell button:focus-visible {
+  outline: 2px solid #b69aff;
+  outline-offset: 3px;
+}
+
+/* ========================================
+   ERROR / ALERT MESSAGES
+======================================== */
+
+.chat-shell [role="alert"] {
+  color: #fecdd3;
+}
+
+/* ========================================
+   RESPONSIVE LAYOUT
+======================================== */
+
+@media (max-width: 900px) {
+  .chat-page {
+    padding: 10px;
   }
-  
-  .chat-page *,
-  .chat-page *::before,
-  .chat-page *::after {
-    box-sizing: border-box;
-  }
-  
-  /* Main application shell */
-  
+
   .chat-shell {
-    width: 100%;
-    max-width: 1440px;
-    height: min(900px, calc(100vh - 48px));
-    min-height: 560px;
-    display: flex;
-    overflow: hidden;
-    background: #ffffff;
-    border: 1px solid #e8eaf2;
-    border-radius: 22px;
-    box-shadow: 0 18px 60px rgba(31, 41, 75, 0.09);
+    border-radius: 15px;
   }
-  
-  /* Smooth transitions */
-  
-  .chat-shell button,
-  .chat-shell input,
-  .chat-shell textarea {
-    font: inherit;
+}
+
+@media (max-width: 600px) {
+  .chat-page {
+    padding: 0;
   }
-  
-  .chat-shell button {
-    cursor: pointer;
+
+  .chat-shell {
+    border: none;
+    border-radius: 0;
+    min-height: 0;
   }
-  
-  .chat-shell button:disabled {
-    cursor: not-allowed;
-    opacity: 0.6;
+}
+
+@media (max-height: 560px) {
+  .chat-page {
+    padding: 8px;
   }
-  
-  /* Focus accessibility */
-  
-  .chat-shell button:focus-visible,
-  .chat-shell input:focus-visible,
-  .chat-shell textarea:focus-visible {
-    outline: 3px solid rgba(124, 92, 246, 0.35);
-    outline-offset: 2px;
+
+  .chat-shell {
+    border-radius: 12px;
   }
-  
-  /* Error messages */
-  
-  .chat-page .error-message,
-  .chat-page [role="alert"] {
-    color: #c2414b;
-  }
-  
-  /* Tablet */
-  
-  @media (max-width: 900px) {
-    .chat-page {
-      padding: 12px;
-    }
-  
-    .chat-shell {
-      height: calc(100vh - 24px);
-      min-height: 500px;
-      border-radius: 16px;
-    }
-  }
-  
-  /* Mobile */
-  
-  @media (max-width: 600px) {
-    .chat-page {
-      padding: 0;
-      min-height: 100dvh;
-      height: 100dvh;
-    }
-  
-    .chat-shell {
-      width: 100%;
-      height: 100%;
-      min-height: 0;
-      border: none;
-      border-radius: 0;
-      box-shadow: none;
-    }
-  }
-  
-  /* Reduced motion accessibility */
-  
-  @media (prefers-reduced-motion: reduce) {
-    .chat-page *,
-    .chat-page *::before,
-    .chat-page *::after {
-      scroll-behavior: auto !important;
-      animation-duration: 0.01ms !important;
-      transition-duration: 0.01ms !important;
-    }
-  }
-  
+}

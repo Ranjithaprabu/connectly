@@ -1,860 +1,564 @@
 
 /* ========================================
    CONNECTLY — CHAT WINDOW
+   Premium dark • Purple • Wine
 ======================================== */
 
 .conversation {
-    width: 100%;
-    min-width: 0;
-    min-height: 0;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    background: #fcfcfe;
-    border-left: 1px solid #edf0f5;
-    box-sizing: border-box;
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  background:
+    radial-gradient(
+      ellipse at 85% 0%,
+      rgba(124, 58, 237, 0.07),
+      transparent 35%
+    ),
+    #0e0d13;
+  color: #f5f3ff;
+}
+
+/* ========================================
+   CONVERSATION HEADER
+======================================== */
+
+.conversation-header {
+  min-height: 76px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 14px 24px;
+  border-bottom: 1px solid #292631;
+  background: rgba(17, 16, 23, 0.94);
+  flex-shrink: 0;
+}
+
+.conversation-header .avatar {
+  width: 43px;
+  height: 43px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(180, 140, 255, 0.35);
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6d28d9, #831843);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  box-shadow: 0 3px 14px rgba(109, 40, 217, 0.16);
+}
+
+.conversation-user {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.conversation-user strong {
+  overflow: hidden;
+  color: #f7f4ff;
+  font-size: 14px;
+  font-weight: 650;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.conversation-user span {
+  overflow: hidden;
+  color: #918ba2;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ========================================
+   ICON BUTTONS
+======================================== */
+
+.icon-btn {
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: transparent;
+  color: #aaa3bb;
+  cursor: pointer;
+}
+
+.icon-btn:hover {
+  border-color: #393044;
+  background: #211b2c;
+  color: #d8b4fe;
+}
+
+.mobile-back {
+  display: none;
+}
+
+/* ========================================
+   MESSAGE LIST
+======================================== */
+
+.message-list {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: auto;
+  padding: 26px clamp(16px, 4vw, 42px);
+  scroll-behavior: smooth;
+}
+
+.message-row {
+  width: 100%;
+  display: flex;
+  animation: message-appear 0.2s ease-out;
+}
+
+.message-mine {
+  justify-content: flex-end;
+}
+
+.message-theirs {
+  justify-content: flex-start;
+}
+
+@keyframes message-appear {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
   }
-  
-  /* ========================================
-     1. CONVERSATION HEADER
-  ======================================== */
-  
-  .conversation-header {
-    width: 100%;
-    min-height: 86px;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 16px 28px;
-    background: #ffffff;
-    border-bottom: 1px solid #edf0f5;
-    box-sizing: border-box;
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  .conversation-header .avatar {
-    width: 48px;
-    height: 48px;
-    min-width: 48px;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    border-radius: 50%;
-    font-size: 18px;
-    font-weight: 700;
+}
+
+/* ========================================
+   MESSAGE BUBBLES
+======================================== */
+
+.message-bubble {
+  max-width: min(70%, 540px);
+  min-width: 70px;
+  padding: 12px 15px 8px;
+  overflow-wrap: anywhere;
+  border: 1px solid #302b3a;
+  border-radius: 15px;
+  background: #191720;
+  color: #eeeaf7;
+}
+
+.message-mine .message-bubble {
+  border-color: rgba(151, 104, 236, 0.45);
+  border-bottom-right-radius: 5px;
+  background: linear-gradient(135deg, #6135a5, #512b79);
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(78, 35, 125, 0.12);
+}
+
+.message-theirs .message-bubble {
+  border-bottom-left-radius: 5px;
+}
+
+.message-bubble p {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.65;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.message-bubble span {
+  display: block;
+  margin-top: 5px;
+  color: #aaa1bc;
+  font-size: 10px;
+  text-align: right;
+}
+
+.message-mine .message-bubble span {
+  color: #e1d0f7;
+}
+
+/* ========================================
+   LOADING STATUS
+======================================== */
+
+.message-status {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: #a39bb5;
+  font-size: 13px;
+}
+
+.spin {
+  animation: connectly-spin 0.9s linear infinite;
+}
+
+@keyframes connectly-spin {
+  to {
+    transform: rotate(360deg);
   }
-  
-  .conversation-user {
-    min-width: 0;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 6px;
-    overflow: hidden;
-  }
-  
-  .conversation-user strong {
-    display: block;
-    overflow: hidden;
-    color: #293247;
-    font-size: 17px;
-    font-weight: 700;
-    line-height: 1.35;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  
-  .conversation-user span {
-    display: block;
-    overflow: hidden;
-    color: #858da2;
-    font-size: 13px;
-    line-height: 1.4;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  
-  /* Back button: hidden on desktop */
-  .mobile-back {
+}
+
+/* ========================================
+   EMPTY CONVERSATION
+======================================== */
+
+.conversation-empty {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  text-align: center;
+}
+
+.empty-icon {
+  width: 66px;
+  height: 66px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  border: 1px solid rgba(167, 139, 250, 0.25);
+  border-radius: 22px;
+  background: linear-gradient(
+    145deg,
+    rgba(124, 58, 237, 0.18),
+    rgba(131, 24, 67, 0.16)
+  );
+  color: #c4a5fd;
+}
+
+.conversation-empty h2 {
+  margin: 0 0 9px;
+  color: #f5f3ff;
+  font-size: 19px;
+  font-weight: 650;
+  letter-spacing: -0.4px;
+}
+
+.conversation-empty p {
+  max-width: 320px;
+  margin: 0;
+  color: #918ba2;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* ========================================
+   MESSAGE COMPOSER
+======================================== */
+
+.message-composer {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 17px 24px 20px;
+  border-top: 1px solid #292631;
+  background: rgba(17, 16, 23, 0.96);
+  flex-shrink: 0;
+}
+
+.message-composer input {
+  flex: 1;
+  width: 0;
+  min-width: 0;
+  height: 46px;
+  box-sizing: border-box;
+  padding: 0 16px;
+  border: 1px solid #34303f;
+  border-radius: 12px;
+  outline: none;
+  background: #15141c;
+  color: #f5f3ff;
+  font-family: inherit;
+  font-size: 13px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.message-composer input::placeholder {
+  color: #817b90;
+  opacity: 1;
+}
+
+.message-composer input:focus {
+  border-color: #9365e8;
+  box-shadow: 0 0 0 3px rgba(147, 101, 232, 0.11);
+}
+
+.send-btn {
+  width: 46px;
+  height: 46px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(186, 153, 255, 0.28);
+  border-radius: 12px;
+  background: linear-gradient(135deg, #8045d5, #642b91);
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(104, 51, 170, 0.18);
+}
+
+.send-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  background: linear-gradient(135deg, #9459e9, #7836a7);
+  box-shadow: 0 6px 20px rgba(124, 58, 237, 0.25);
+}
+
+.send-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.send-btn:focus-visible,
+.icon-btn:focus-visible {
+  outline: 2px solid #b69aff;
+  outline-offset: 3px;
+}
+
+/* ========================================
+   ERROR ALERT
+======================================== */
+
+.chat-alert {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 12px 20px 0;
+  padding: 10px 13px;
+  border: 1px solid rgba(248, 113, 113, 0.25);
+  border-radius: 10px;
+  background: rgba(127, 29, 29, 0.16);
+  color: #fecaca;
+  font-size: 12px;
+}
+
+.chat-alert button {
+  flex-shrink: 0;
+  border: 0;
+  background: transparent;
+  color: #fecaca;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* ========================================
+   WELCOME PANEL
+======================================== */
+
+.welcome-panel {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 28px;
+  overflow-y: auto;
+  text-align: center;
+  background:
+    radial-gradient(
+      ellipse at 50% 38%,
+      rgba(109, 40, 217, 0.1),
+      transparent 43%
+    );
+}
+
+.welcome-art {
+  width: 94px;
+  height: 94px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 25px;
+  border: 1px solid rgba(167, 139, 250, 0.3);
+  border-radius: 30px;
+  background: linear-gradient(
+    145deg,
+    rgba(124, 58, 237, 0.2),
+    rgba(131, 24, 67, 0.18)
+  );
+  color: #c4a5fd;
+  box-shadow: 0 15px 50px rgba(91, 33, 182, 0.12);
+}
+
+.welcome-panel h2 {
+  margin: 0 0 12px;
+  color: #f5f3ff;
+  font-size: clamp(20px, 2.5vw, 28px);
+  font-weight: 700;
+  letter-spacing: -0.8px;
+}
+
+.welcome-panel > p {
+  max-width: 360px;
+  margin: 0;
+  color: #9690a5;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.welcome-features {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.welcome-features span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 12px;
+  border: 1px solid #302a3c;
+  border-radius: 10px;
+  background: rgba(24, 21, 32, 0.8);
+  color: #b8afc9;
+  font-size: 11px;
+}
+
+.welcome-features svg {
+  color: #b794f6;
+}
+
+/* ========================================
+   MOBILE RESPONSIVENESS
+======================================== */
+
+@media (max-width: 600px) {
+  .conversation {
     display: none;
+    width: 100%;
   }
-  
-  /* ========================================
-     2. ERROR ALERT
-  ======================================== */
-  
-  .chat-alert {
-    width: calc(100% - 36px);
-    flex-shrink: 0;
+
+  .conversation.conversation-visible-mobile {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 14px;
-    margin: 14px 18px 0;
-    padding: 13px 16px;
-    color: #b52e48;
-    background: #fff0f2;
-    border: 1px solid #ffd9df;
-    border-radius: 12px;
-    font-size: 14px;
-    line-height: 1.5;
-    box-sizing: border-box;
   }
-  
-  .chat-alert span {
-    min-width: 0;
-    overflow-wrap: anywhere;
+
+  .conversation-header {
+    min-height: 66px;
+    gap: 10px;
+    padding: 10px 14px;
   }
-  
-  .chat-alert button {
-    width: 28px;
-    height: 28px;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    color: #b52e48;
-    background: transparent;
-    border: none;
-    border-radius: 6px;
-    font-size: 23px;
-    line-height: 1;
-    cursor: pointer;
+
+  .mobile-back {
+    display: inline-flex;
   }
-  
-  .chat-alert button:hover {
-    background: #ffe1e6;
+
+  .conversation-header .avatar {
+    width: 39px;
+    height: 39px;
   }
-  
-  /* ========================================
-     3. MESSAGE LIST
-  ======================================== */
-  
+
   .message-list {
-    flex: 1;
-    min-width: 0;
-    min-height: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-    overflow-x: hidden;
-    overflow-y: auto;
-    padding: 28px 30px;
-    background:
-      radial-gradient(
-        circle at 50% 50%,
-        rgba(243, 244, 255, 0.35),
-        transparent 70%
-      ),
-      #fcfcfe;
-    box-sizing: border-box;
-    scroll-behavior: smooth;
-    overscroll-behavior: contain;
+    gap: 13px;
+    padding: 20px 13px;
   }
-  
-  .message-list::-webkit-scrollbar {
-    width: 6px;
-  }
-  
-  .message-list::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  
-  .message-list::-webkit-scrollbar-thumb {
-    background: #e0e3ee;
-    border-radius: 10px;
-  }
-  
-  .message-list::-webkit-scrollbar-thumb:hover {
-    background: #c9cede;
-  }
-  
-  /* ========================================
-     4. MESSAGE ROW ALIGNMENT
-  ======================================== */
-  
-  .message-row {
-    width: 100%;
-    min-width: 0;
-    display: flex;
-    align-items: flex-end;
-    animation: message-in 0.2s ease;
-    box-sizing: border-box;
-  }
-  
-  .message-mine {
-    justify-content: flex-end;
-  }
-  
-  .message-theirs {
-    justify-content: flex-start;
-  }
-  
-  /* ========================================
-     5. MESSAGE BUBBLES
-  ======================================== */
-  
+
   .message-bubble {
-    width: fit-content;
-    max-width: min(75%, 560px);
-    min-width: 0;
-    padding: 13px 17px 9px;
-    overflow: hidden;
-    overflow-wrap: anywhere;
-    border: 1px solid transparent;
-    border-radius: 18px;
-    box-shadow: 0 2px 6px rgba(30, 40, 70, 0.035);
-    box-sizing: border-box;
+    max-width: 82%;
+    padding: 10px 12px 7px;
   }
-  
-  .message-mine .message-bubble {
-    color: #ffffff;
-    background: linear-gradient(135deg, #696af0, #5556d9);
-    border-bottom-right-radius: 5px;
-  }
-  
-  .message-theirs .message-bubble {
-    color: #394258;
-    background: #ffffff;
-    border-color: #eaedf4;
-    border-bottom-left-radius: 5px;
-  }
-  
+
   .message-bubble p {
-    margin: 0;
-    overflow-wrap: anywhere;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 1.7;
-    white-space: pre-wrap;
+    font-size: 13px;
   }
-  
-  .message-bubble span {
-    display: block;
-    margin-top: 7px;
-    color: rgba(255, 255, 255, 0.76);
-    font-size: 11px;
-    line-height: 1.4;
-    text-align: right;
+
+  .message-composer {
+    gap: 8px;
+    padding: 12px;
+    padding-bottom: max(12px, env(safe-area-inset-bottom));
   }
-  
-  .message-theirs .message-bubble span {
-    color: #969db0;
+
+  .message-composer input {
+    height: 44px;
+    padding: 0 12px;
+    font-size: 13px;
   }
-  
-  /* ========================================
-     6. LOADING STATUS
-  ======================================== */
-  
-  .message-status {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    margin: auto;
-    padding: 20px;
-    color: #858da2;
-    font-size: 15px;
-    line-height: 1.5;
-    text-align: center;
+
+  .send-btn {
+    width: 44px;
+    height: 44px;
   }
-  
-  .message-status svg {
-    flex-shrink: 0;
-    color: #696af0;
+
+  .welcome-panel {
+    padding: 22px;
   }
-  
-  /* ========================================
-     7. EMPTY CONVERSATION
-  ======================================== */
-  
-  .conversation-empty {
-    width: 100%;
-    max-width: 390px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: auto;
-    padding: 32px 20px;
-    text-align: center;
-    box-sizing: border-box;
-  }
-  
-  .empty-icon {
+
+  .welcome-art {
     width: 76px;
     height: 76px;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 22px;
-    color: #6465e5;
-    background: #eeeefe;
-    border: 1px solid #e2e3ff;
-    border-radius: 24px;
+    margin-bottom: 20px;
+    border-radius: 25px;
   }
-  
-  .conversation-empty h2 {
-    margin: 0 0 12px;
-    color: #30384e;
-    font-family: Inter, sans-serif;
-    font-size: 25px;
-    font-weight: 800;
-    line-height: 1.35;
-    letter-spacing: -0.6px;
-  }
-  
-  .conversation-empty p {
-    max-width: 320px;
-    margin: 0;
-    color: #858da2;
-    font-size: 15px;
-    line-height: 1.8;
-    overflow-wrap: anywhere;
-  }
-  
-  /* ========================================
-     8. MESSAGE COMPOSER
-  ======================================== */
-  
-  .message-composer {
-    width: 100%;
-    min-width: 0;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 17px 24px;
-    background: #ffffff;
-    border-top: 1px solid #edf0f5;
-    box-sizing: border-box;
-  }
-  
-  .message-composer input {
-    flex: 1;
-    width: 0;
-    min-width: 0;
-    height: 50px;
-    padding: 0 18px;
-    color: #30394e;
-    background: #f8f9fd;
-    border: 1px solid #e9ecf4;
-    border-radius: 14px;
-    outline: none;
-    font-family: Inter, sans-serif;
-    font-size: 16px;
-    line-height: normal;
-    box-sizing: border-box;
-    transition:
-      background 0.2s,
-      border-color 0.2s,
-      box-shadow 0.2s;
-  }
-  
-  .message-composer input::placeholder {
-    color: #a0a7b9;
-    opacity: 1;
-  }
-  
-  .message-composer input:focus {
-    background: #ffffff;
-    border-color: #c9caff;
-    box-shadow: 0 0 0 3px rgba(91, 92, 226, 0.08);
-  }
-  
-  .send-btn {
-    width: 50px;
-    height: 50px;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    color: #ffffff;
-    background: linear-gradient(135deg, #696af0, #5051d5);
-    border: none;
-    border-radius: 14px;
-    box-shadow: 0 5px 12px rgba(91, 92, 226, 0.18);
-    cursor: pointer;
-    transition:
-      transform 0.2s,
-      box-shadow 0.2s,
-      opacity 0.2s;
-  }
-  
-  .send-btn svg {
-    width: 21px;
-    height: 21px;
-    flex-shrink: 0;
-  }
-  
-  .send-btn:hover:not(:disabled) {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 17px rgba(91, 92, 226, 0.25);
-  }
-  
-  .send-btn:active:not(:disabled) {
-    transform: scale(0.96);
-  }
-  
-  .send-btn:disabled {
-    opacity: 0.55;
-    box-shadow: none;
-    cursor: not-allowed;
-  }
-  
-  /* ========================================
-     9. WELCOME SCREEN
-  ======================================== */
-  
-  .welcome-panel {
-    flex: 1;
-    min-width: 0;
-    min-height: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    overflow-y: auto;
-    padding: 36px 28px;
-    text-align: center;
-    background:
-      radial-gradient(
-        circle at 50% 40%,
-        rgba(110, 111, 245, 0.07),
-        transparent 40%
-      ),
-      #fcfcfe;
-    box-sizing: border-box;
-  }
-  
-  .welcome-art {
-    width: 100px;
-    height: 100px;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 28px;
-    color: #ffffff;
-    background: linear-gradient(145deg, #7778f7, #5051d5);
-    border: 9px solid #eeeeff;
-    border-radius: 30px;
-    box-shadow: 0 12px 35px rgba(91, 92, 226, 0.17);
-  }
-  
+
   .welcome-art svg {
-    width: 46px;
-    height: 46px;
+    width: 40px;
+    height: 40px;
   }
-  
-  .welcome-panel h2 {
-    max-width: 100%;
-    margin: 0 0 14px;
-    color: #293247;
-    font-family: Inter, sans-serif;
-    font-size: clamp(25px, 2.4vw, 34px);
-    font-weight: 800;
-    line-height: 1.3;
-    letter-spacing: -0.9px;
-    overflow-wrap: anywhere;
-  }
-  
-  .welcome-panel > p {
-    max-width: 380px;
-    margin: 0;
-    color: #858da2;
-    font-size: 16px;
-    line-height: 1.8;
-  }
-  
+
   .welcome-features {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-top: 30px;
+    gap: 8px;
+    margin-top: 22px;
   }
-  
-  .welcome-features span {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 9px;
-    padding: 12px 15px;
-    color: #6b7288;
-    background: #ffffff;
-    border: 1px solid #eceef5;
-    border-radius: 11px;
-    font-size: 12px;
-    font-weight: 600;
-    line-height: 1.4;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .message-row,
+  .spin {
+    animation: none;
   }
-  
-  .welcome-features svg {
-    flex-shrink: 0;
-    color: #6869df;
+
+  .message-list {
+    scroll-behavior: auto;
   }
-  
-  /* ========================================
-     10. TABLET ALIGNMENT
-  ======================================== */
-  
-  @media (max-width: 900px) {
-    .conversation-header {
-      min-height: 78px;
-      gap: 12px;
-      padding: 14px 17px;
-    }
-  
-    .conversation-header .avatar {
-      width: 44px;
-      height: 44px;
-      min-width: 44px;
-    }
-  
-    .conversation-user strong {
-      font-size: 16px;
-    }
-  
-    .conversation-user span {
-      font-size: 12px;
-    }
-  
-    .message-list {
-      gap: 15px;
-      padding: 22px 18px;
-    }
-  
-    .message-bubble {
-      max-width: 82%;
-      padding: 12px 14px 9px;
-    }
-  
-    .message-bubble p {
-      font-size: 15px;
-    }
-  
-    .message-composer {
-      gap: 10px;
-      padding: 13px;
-    }
-  
-    .message-composer input,
-    .send-btn {
-      height: 46px;
-    }
-  
-    .send-btn {
-      width: 46px;
-    }
-  
-    .welcome-panel {
-      padding: 24px 18px;
-    }
-  
-    .welcome-art {
-      width: 84px;
-      height: 84px;
-      margin-bottom: 22px;
-      border-radius: 26px;
-    }
-  
-    .welcome-panel h2 {
-      font-size: 25px;
-    }
-  
-    .welcome-panel > p {
-      font-size: 14px;
-    }
-  
-    .welcome-features {
-      gap: 8px;
-    }
-  
-    .welcome-features span {
-      padding: 10px;
-      font-size: 11px;
-    }
-  }
-  
-  /* ========================================
-     11. MOBILE ALIGNMENT
-  ======================================== */
-  
-  @media (max-width: 640px) {
-    .conversation {
-      display: none;
-      border-left: none;
-    }
-  
-    .conversation.conversation-visible-mobile {
-      position: absolute;
-      inset: 0;
-      z-index: 2;
-      width: 100%;
-      height: 100%;
-      min-height: 0;
-      display: flex;
-      background: #fcfcfe;
-    }
-  
-    .conversation-header {
-      min-height: 70px;
-      gap: 11px;
-      padding: 10px 13px;
-      padding-top: max(10px, env(safe-area-inset-top));
-    }
-  
-    .mobile-back {
-      width: 38px;
-      height: 38px;
-      flex-shrink: 0;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0;
-    }
-  
-    .conversation-header .avatar {
-      width: 42px;
-      height: 42px;
-      min-width: 42px;
-      font-size: 16px;
-    }
-  
-    .conversation-user {
-      gap: 4px;
-    }
-  
-    .conversation-user strong {
-      font-size: 15px;
-    }
-  
-    .conversation-user span {
-      font-size: 12px;
-    }
-  
-    .chat-alert {
-      width: calc(100% - 22px);
-      margin: 11px 11px 0;
-      padding: 10px 12px;
-      font-size: 13px;
-    }
-  
-    .message-list {
-      gap: 13px;
-      padding: 18px 13px;
-    }
-  
-    .message-bubble {
-      max-width: 88%;
-      padding: 11px 13px 8px;
-      border-radius: 16px;
-    }
-  
-    .message-bubble p {
-      font-size: 15px;
-      line-height: 1.65;
-    }
-  
-    .message-bubble span {
-      margin-top: 6px;
-      font-size: 10px;
-    }
-  
-    .message-status {
-      gap: 9px;
-      font-size: 13px;
-    }
-  
-    .conversation-empty {
-      padding: 24px 18px;
-    }
-  
-    .empty-icon {
-      width: 64px;
-      height: 64px;
-      margin-bottom: 18px;
-      border-radius: 20px;
-    }
-  
-    .conversation-empty h2 {
-      font-size: 22px;
-    }
-  
-    .conversation-empty p {
-      font-size: 14px;
-    }
-  
-    .message-composer {
-      gap: 9px;
-      padding: 10px 11px;
-      padding-bottom: max(10px, env(safe-area-inset-bottom));
-    }
-  
-    .message-composer input {
-      height: 46px;
-      padding: 0 13px;
-      border-radius: 12px;
-      font-size: 16px;
-    }
-  
-    .message-composer input::placeholder {
-      font-size: 14px;
-    }
-  
-    .send-btn {
-      width: 46px;
-      height: 46px;
-      border-radius: 12px;
-    }
-  
-    .send-btn svg {
-      width: 20px;
-      height: 20px;
-    }
-  
-    .welcome-panel {
-      padding: 26px 20px;
-    }
-  
-    .welcome-art {
-      width: 82px;
-      height: 82px;
-      margin-bottom: 22px;
-      border-width: 7px;
-      border-radius: 25px;
-    }
-  
-    .welcome-art svg {
-      width: 38px;
-      height: 38px;
-    }
-  
-    .welcome-panel h2 {
-      font-size: 25px;
-      letter-spacing: -0.6px;
-    }
-  
-    .welcome-panel > p {
-      font-size: 14px;
-    }
-  
-    .welcome-features {
-      gap: 9px;
-      margin-top: 23px;
-    }
-  
-    .welcome-features span {
-      padding: 10px 11px;
-      font-size: 11px;
-    }
-  }
-  
-  /* ========================================
-     12. SMALL MOBILE SCREENS
-  ======================================== */
-  
-  @media (max-width: 380px) {
-    .conversation-header {
-      gap: 8px;
-      padding-right: 10px;
-      padding-left: 10px;
-    }
-  
-    .mobile-back {
-      width: 34px;
-      height: 34px;
-    }
-  
-    .conversation-header .avatar {
-      width: 38px;
-      height: 38px;
-      min-width: 38px;
-    }
-  
-    .conversation-user strong {
-      font-size: 14px;
-    }
-  
-    .conversation-user span {
-      font-size: 11px;
-    }
-  
-    .message-list {
-      padding-right: 10px;
-      padding-left: 10px;
-    }
-  
-    .message-bubble {
-      max-width: 92%;
-      padding: 10px 11px 8px;
-    }
-  
-    .message-bubble p {
-      font-size: 14px;
-    }
-  
-    .message-composer {
-      gap: 7px;
-      padding-right: 8px;
-      padding-left: 8px;
-    }
-  
-    .message-composer input {
-      padding: 0 10px;
-    }
-  
-    .send-btn {
-      width: 43px;
-      height: 43px;
-    }
-  
-    .welcome-panel h2 {
-      font-size: 23px;
-    }
-  
-    .welcome-features {
-      flex-direction: column;
-      align-items: stretch;
-    }
-  }
-  
-  /* ========================================
-     13. ACCESSIBILITY
-  ======================================== */
-  
-  @keyframes message-in {
-    from {
-      opacity: 0;
-      transform: translateY(5px);
-    }
-  
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  @media (prefers-reduced-motion: reduce) {
-    .message-row {
-      animation: none;
-    }
-  
-    .message-list {
-      scroll-behavior: auto;
-    }
-  
-    .send-btn {
-      transition: none;
-    }
-  }
-  
+}
+
+/* Contact avatar in the conversation header */
+.conversation-avatar {
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  min-height: 42px;
+  flex-shrink: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.conversation-avatar-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}

@@ -4,6 +4,9 @@ import "./AuthScreen.css";
 import {
   MessageCircle,
   LoaderCircle,
+  Eye,
+  EyeOff,
+  ArrowRight,
 } from "lucide-react";
 import { request } from "../api/client";
 
@@ -12,9 +15,12 @@ export default function AuthScreen({ onLogin }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
+
+  const isLogin = mode === "login";
 
   async function submit(event) {
     event.preventDefault();
@@ -24,29 +30,39 @@ export default function AuthScreen({ onLogin }) {
     setNotice("");
 
     try {
-      if (mode === "register") {
+      if (!isLogin) {
         const data = await request("/api/auth/register", null, {
           method: "POST",
-          body: JSON.stringify({ name, email, password }),
+          body: JSON.stringify({
+            name: name.trim(),
+            email: email.trim(),
+            password,
+          }),
         });
 
-        // Registration succeeds; ask the user to sign in.
         setMode("login");
         setName("");
         setPassword("");
+        setShowPassword(false);
+
         setNotice(
-          data.message || "Registration successful. Please log in."
+          data.message || "Account created successfully. Please sign in."
         );
       } else {
         const data = await request("/api/auth/login", null, {
           method: "POST",
-          body: JSON.stringify({ email, password }),
+          body: JSON.stringify({
+            email: email.trim(),
+            password,
+          }),
         });
 
         onLogin(data);
       }
     } catch (err) {
-      setError(err.message);
+      setError(
+        err.message || "Something went wrong. Please try again."
+      );
     } finally {
       setBusy(false);
     }
@@ -56,101 +72,146 @@ export default function AuthScreen({ onLogin }) {
     setMode((current) =>
       current === "login" ? "register" : "login"
     );
+
     setError("");
     setNotice("");
+    setPassword("");
+    setShowPassword(false);
   }
 
   return (
     <main className="auth-page">
       <section className="auth-card">
         <div className="brand-mark">
-          <MessageCircle size={28} />
+          <MessageCircle size={25} strokeWidth={2.2} />
         </div>
 
-        <h1>Connectly</h1>
-        <p className="muted">
-          Conversations that bring people closer.
-        </p>
+      
 
-        <h2>
-          {mode === "login"
-            ? "Welcome back"
-            : "Create your account"}
-        </h2>
+        <div className="auth-heading">
+          <h2>
+            {isLogin ? "Welcome back" : "Create your account"}
+          </h2>
 
-        <p className="muted">
-          {mode === "login"
-            ? "Sign in to continue chatting."
-            : "Join the conversation."}
-        </p>
+          <p>
+            {isLogin
+              ? "Sign in to pick up where you left off."
+              : "Join Connectly and start a conversation."}
+          </p>
+        </div>
 
-        {error && <div className="alert error">{error}</div>}
-        {notice && <div className="alert success">{notice}</div>}
+        {error && (
+          <div className="alert error" role="alert">
+            {error}
+          </div>
+        )}
+
+        {notice && (
+          <div className="alert success" role="status">
+            {notice}
+          </div>
+        )}
 
         <form onSubmit={submit} className="auth-form">
-          {mode === "register" && (
-            <label>
-              Full name
+          {!isLogin && (
+            <div className="input-field">
               <input
+                type="text"
                 value={name}
                 onChange={(event) => setName(event.target.value)}
-                placeholder="Your name"
-                required
+                placeholder="Full name"
+                aria-label="Full name"
+                autoComplete="name"
                 minLength={2}
                 maxLength={100}
-                autoComplete="name"
+                required
               />
-            </label>
+            </div>
           )}
 
-          <label>
-            Email address
+          <div className="input-field">
             <input
               type="email"
               value={email}
               onChange={(event) => setEmail(event.target.value)}
-              placeholder="you@example.com"
-              required
+              placeholder="Email address"
+              aria-label="Email address"
               autoComplete="email"
+              required
             />
-          </label>
+          </div>
 
-          <label>
-            Password
+          <div className="input-field password-field">
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               value={password}
               onChange={(event) => setPassword(event.target.value)}
-              placeholder="At least 8 characters"
-              required
+              placeholder="Password"
+              aria-label="Password"
+              autoComplete={
+                isLogin ? "current-password" : "new-password"
+              }
               minLength={8}
               maxLength={72}
-              autoComplete={
-                mode === "login"
-                  ? "current-password"
-                  : "new-password"
-              }
+              required
             />
-          </label>
 
-          <button className="primary-btn" disabled={busy}>
+            <button
+              type="button"
+              className="password-toggle"
+              onClick={() =>
+                setShowPassword((current) => !current)
+              }
+              aria-label={
+                showPassword ? "Hide password" : "Show password"
+              }
+              aria-pressed={showPassword}
+            >
+              {showPassword ? (
+                <EyeOff size={18} />
+              ) : (
+                <Eye size={18} />
+              )}
+            </button>
+          </div>
+
+          <button
+            type="submit"
+            className="primary-btn"
+            disabled={busy}
+          >
             {busy ? (
-              <LoaderCircle className="spin" size={18} />
-            ) : mode === "login" ? (
-              "Sign in"
+              <>
+                <LoaderCircle className="spin" size={18} />
+                {isLogin ? "Signing in..." : "Creating account..."}
+              </>
             ) : (
-              "Create account"
+              <>
+                {isLogin ? "Sign in" : "Create account"}
+                <ArrowRight size={17} />
+              </>
             )}
           </button>
         </form>
 
-        <p className="switch-mode">
-          {mode === "login"
-            ? "New to Connectly?"
-            : "Already have an account?"}{" "}
-          <button type="button" onClick={switchMode}>
-            {mode === "login" ? "Create account" : "Sign in"}
+        <div className="auth-footer">
+          <span>
+            {isLogin
+              ? "New to Connectly?"
+              : "Already have an account?"}
+          </span>
+
+          <button
+            type="button"
+            onClick={switchMode}
+            disabled={busy}
+          >
+            {isLogin ? "Create account" : "Sign in"}
           </button>
+        </div>
+
+        <p className="auth-legal">
+          Your conversations begin with a connection.
         </p>
       </section>
     </main>

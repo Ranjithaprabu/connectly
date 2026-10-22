@@ -1,5 +1,4 @@
-
-export const API = "https://connectly-9p3p.onrender.com";
+export const API = "https://connectly-9p3p.onrender.com"; // Replace with your backend API URL
 
 export async function request(path, token, options = {}) {
   const response = await fetch(`${API}${path}`, {

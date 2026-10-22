@@ -1,29 +1,34 @@
 
-/* ================================
+/* ========================================
    AVATAR UPLOAD
-================================ */
+======================================== */
 
 .avatar-upload {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
-  width: 100%;
+  gap: 12px;
+  font-family: "DM Sans", "Inter", sans-serif;
 }
 
-/* Circular image container */
+/* ========================================
+   PROFILE IMAGE WRAPPER
+======================================== */
+
 .avatar-upload__image-wrap {
   position: relative;
   width: 104px;
   height: 104px;
   min-width: 104px;
   min-height: 104px;
+  flex-shrink: 0;
   border-radius: 50%;
   overflow: visible;
-  flex-shrink: 0;
 }
 
-/* Make the image completely fill the circle */
+/* Profile image */
+
 .avatar-upload__preview {
   position: absolute;
   inset: 0;
@@ -34,104 +39,244 @@
   max-height: none !important;
   object-fit: cover;
   object-position: center;
-  border: none;
+  border: 2px solid #5b3b80;
   border-radius: 50%;
   box-sizing: border-box;
+  background: #18151f;
 }
 
-/* Placeholder */
+/* Empty avatar */
+
 .avatar-upload__placeholder {
   position: absolute;
   inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #64748b;
-  background: #eef2f7;
+  color: #c4b5fd;
+  background: linear-gradient(135deg, #282035, #401d3b);
+  border: 2px solid #5b3b80;
   border-radius: 50%;
 }
 
-/* Camera button overlay */
+/* ========================================
+   CAMERA BUTTON
+======================================== */
+
 .avatar-upload__camera {
   position: absolute !important;
   z-index: 10;
   right: -2px;
   bottom: -2px;
 
+  width: 36px !important;
+  height: 36px !important;
+  min-width: 36px !important;
+  min-height: 36px !important;
+  padding: 0 !important;
+
   display: flex !important;
   align-items: center;
   justify-content: center;
 
-  width: 36px !important;
-  height: 36px !important;
-  min-width: 36px;
-  padding: 0 !important;
-
   color: #ffffff !important;
-  background: #4f46e5 !important;
-  border: 3px solid #ffffff !important;
+  background: linear-gradient(135deg, #8b5cf6, #6d28d9) !important;
+  border: 3px solid #101015 !important;
   border-radius: 50% !important;
 
   opacity: 1 !important;
   visibility: visible !important;
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  transition: background 0.2s ease, transform 0.2s ease;
+  box-shadow: 0 4px 14px rgba(124, 58, 237, 0.35);
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .avatar-upload__camera svg {
   display: block;
   width: 17px;
   height: 17px;
-  color: #ffffff;
   flex-shrink: 0;
+  color: #ffffff;
 }
 
 .avatar-upload__camera:hover:not(:disabled) {
-  background: #3730a3 !important;
-  transform: scale(1.06);
+  background: linear-gradient(135deg, #a78bfa, #7c3aed) !important;
+  box-shadow: 0 5px 18px rgba(139, 92, 246, 0.45);
+  transform: scale(1.08);
+}
+
+.avatar-upload__camera:focus-visible {
+  outline: 2px solid #c4b5fd;
+  outline-offset: 3px;
 }
 
 .avatar-upload__camera:disabled {
   cursor: wait;
-  opacity: 0.8 !important;
+  opacity: 0.7 !important;
 }
 
-/* Upload status */
+/* ========================================
+   DROPDOWN MENU
+======================================== */
+
+.avatar-upload__menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: -12px;
+  z-index: 20;
+
+  width: 200px;
+  padding: 6px;
+
+  background: #19171f;
+  border: 1px solid #383043;
+  border-radius: 13px;
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.4);
+
+  animation: avatar-menu-enter 0.16s ease-out;
+}
+
+.avatar-upload__menu button {
+  width: 100%;
+  min-height: 40px;
+  padding: 10px 11px;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  color: #e8e2f1;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+
+  transition:
+    color 0.18s ease,
+    background 0.18s ease;
+}
+
+.avatar-upload__menu button svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  color: #b8a0e8;
+}
+
+.avatar-upload__menu button:hover:not(:disabled) {
+  color: #ffffff;
+  background: #292133;
+}
+
+.avatar-upload__menu button:hover:not(:disabled) svg {
+  color: #c4b5fd;
+}
+
+.avatar-upload__menu button:focus-visible {
+  outline: 2px solid #8b5cf6;
+  outline-offset: -2px;
+}
+
+.avatar-upload__menu button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Remove photo option */
+
+.avatar-upload__menu .avatar-upload__remove {
+  color: #fca5a5;
+}
+
+.avatar-upload__menu .avatar-upload__remove svg {
+  color: #f87171;
+}
+
+.avatar-upload__menu .avatar-upload__remove:hover:not(:disabled) {
+  color: #fecaca;
+  background: rgba(220, 38, 38, 0.12);
+}
+
+.avatar-upload__menu .avatar-upload__remove:hover:not(:disabled) svg {
+  color: #fca5a5;
+}
+
+/* ========================================
+   UPLOAD STATUS
+======================================== */
+
 .avatar-upload__status {
   margin: 0;
-  color: #64748b;
+  color: #a79bb8;
   font-size: 12px;
+  font-weight: 500;
+  line-height: 1.6;
   text-align: center;
 }
 
-/* Error message */
+/* ========================================
+   ERROR MESSAGE
+======================================== */
+
 .avatar-upload__error {
-  max-width: 260px;
+  width: 100%;
+  max-width: 280px;
   margin: 0;
-  padding: 8px 12px;
-  color: #b91c1c;
-  background: #fef2f2;
-  border: 1px solid #fecaca;
-  border-radius: 8px;
+  padding: 10px 12px;
+
+  color: #fca5a5;
+  background: rgba(127, 29, 29, 0.2);
+  border: 1px solid rgba(248, 113, 113, 0.25);
+  border-radius: 10px;
+
   font-size: 12px;
-  line-height: 1.5;
+  line-height: 1.6;
   text-align: center;
   overflow-wrap: anywhere;
 }
 
-/* Loading animation */
+/* ========================================
+   LOADING SPINNER
+======================================== */
+
 .avatar-upload__spinner {
-  animation: avatar-spin 1s linear infinite;
+  animation: avatar-upload-spin 1s linear infinite;
 }
 
-@keyframes avatar-spin {
+@keyframes avatar-upload-spin {
   to {
     transform: rotate(360deg);
   }
 }
 
-/* Mobile */
+/* ========================================
+   MENU ANIMATION
+======================================== */
+
+@keyframes avatar-menu-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========================================
+   MOBILE
+======================================== */
+
 @media (max-width: 480px) {
   .avatar-upload__image-wrap {
     width: 88px;
@@ -143,71 +288,31 @@
   .avatar-upload__camera {
     width: 33px !important;
     height: 33px !important;
-    min-width: 33px;
+    min-width: 33px !important;
+    min-height: 33px !important;
+  }
+
+  .avatar-upload__menu {
+    right: -8px;
+    width: 185px;
   }
 }
 
-.avatar-upload__image-wrap {
-    position: relative;
-  }
-  
-  .avatar-upload__camera {
-    z-index: 2;
-    cursor: pointer;
-  }
-  
-  .avatar-upload__menu {
-    position: absolute;
-    top: calc(100% + 8px);
-    right: 0;
-    z-index: 20;
-    width: 190px;
-    padding: 6px;
-    background: #fff;
-    border: 1px solid #e5e7eb;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.14);
-  }
-  
+/* ========================================
+   REDUCED MOTION
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .avatar-upload__camera,
   .avatar-upload__menu button {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    width: 100%;
-    padding: 11px 10px;
-    border: none;
-    border-radius: 8px;
-    background: transparent;
-    color: #263047;
-    font: inherit;
-    text-align: left;
-    cursor: pointer;
+    transition: none;
   }
-  
-  .avatar-upload__menu button:hover {
-    background: #f1f5f9;
+
+  .avatar-upload__menu {
+    animation: none;
   }
-  
-  .avatar-upload__menu button:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-  }
-  
-  .avatar-upload__menu .avatar-upload__remove {
-    color: #dc2626;
-  }
-  
-  .avatar-upload__menu .avatar-upload__remove:hover {
-    background: #fef2f2;
-  }
-  
+
   .avatar-upload__spinner {
-    animation: avatar-upload-spin 1s linear infinite;
+    animation-duration: 2s;
   }
-  
-  @keyframes avatar-upload-spin {
-    to {
-      transform: rotate(360deg);
-    }
-  }
-  
+}

@@ -1,38 +1,33 @@
-const nodemailer = require("nodemailer");
-
-let mailer = null;
-
-if (process.env.SMTP_USER && process.env.SMTP_PASS) {
-  mailer = nodemailer.createTransport({
-    host: process.env.SMTP_HOST || "smtp.gmail.com",
-    port: Number(process.env.SMTP_PORT || 465),
-    secure: String(process.env.SMTP_SECURE || "true") === "true",
-    auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASS,
-    },
-  });
-}
 
 async function deliverOtp(email, otp) {
-  if (!mailer) {
-    if (process.env.NODE_ENV !== "production") {
-      console.log(`[LOCAL DEVELOPMENT] OTP for ${email}: ${otp}`);
-      return;
-    }
+  const apiKey = process.env.RESEND_API_KEY;
 
-    throw new Error("SMTP is not configured in production.");
+  if (!apiKey) {
+    throw new Error("RESEND_API_KEY is not configured.");
   }
 
-  await mailer.sendMail({
-    from: {
-      name: "Connectly",
-      address: process.env.SMTP_USER,
+  const response = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
     },
-    to: email,
-    subject: "Your Connectly verification code",
-    text: `Your Connectly OTP is ${otp}. It expires in 10 minutes.`,
+    body: JSON.stringify({
+      from: "Connectly <onboarding@resend.dev>",
+      to: [email],
+      subject: "Your Connectly verification code",
+      text: `Your Connectly OTP is ${otp}. It expires in 10 minutes.`,
+    }),
   });
+
+  if (!response.ok) {
+    const error = await response.text();
+    console.error("Resend email failed:", response.status, error);
+    throw new Error("Could not send verification email.");
+  }
+
+  const result = await response.json();
+  console.log("OTP email accepted by Resend:", result.id);
 }
 
 module.exports = { deliverOtp };
